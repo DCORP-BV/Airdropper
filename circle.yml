@@ -6,7 +6,7 @@ machine:
 
 test:
   pre:
-    - npm run truffle-compile
+    - npm run compile
   override:
     - npm run testrpc_boot # boot the testrpc server using docker
     - npm run test-integration
