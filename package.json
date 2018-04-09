@@ -6,7 +6,7 @@
     "test": "test"
   },
   "scripts": {
-    "build": "babel --presets env src -d lib",
+    "build": "truffle build",
     "serve": "truffle serve",
     "compile": "truffle compile",
     "migrate": "truffle migrate",
