@@ -45,7 +45,19 @@ if (command === 'drop') {
     let provider = new Web3.providers.HttpProvider(
       `http:\/\/${truffle.networks[network].host}:${truffle.networks[network].port}`)
     let web3 = new Web3(provider)
-    Airdropper.setProvider(provider)
+
+    Airdropper.setProvider(web3.currentProvider)
+    Token.setProvider(web3.currentProvider)
+    if (truffle.networks[network].from) {
+      web3.eth.defaultAccount = truffle.networks[network].from
+      Token.defaults({
+        from: truffle.networks[network].from
+      })
+      Airdropper.defaults({
+        from: truffle.networks[network].from,
+        gas: truffle.networks[network].gas
+      })
+    }
     
     let airdropperInstance = await fixTruffleContractCompatibilityIssue(Airdropper).deployed()
     let tokenInstance = Token.at(token)
